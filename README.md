@@ -1,5 +1,4 @@
-```markdown
-# Wanderer Notification Bot
+# Wanderer Bot Starter
 
 A minimal Elixir application that polls the Wanderer API once per minute and sends notifications for any new visible systems.
 
@@ -20,65 +19,60 @@ A minimal Elixir application that polls the Wanderer API once per minute and sen
 
 1. **Clone the repository:**
 
-   \`git clone https://github.com/yourusername/wanderer_notifier.git\`  
-   \`cd wanderer_notifier\`
+   `git clone https://github.com/guarzo/wanderer_bot_starter.git`  
+   `cd wanderer_bot_starter`
 
 2. **Configure Environment Variables:**
 
-   Create a \`.env\` file or set environment variables in your shell:
+   Create a `.env` file or set environment variables in your shell:
 
-   \`\`\`bash
+   ```bash
    export WANDERER_API_TOKEN=your_api_token_here
    export WANDERER_MAP_SLUG=your_map_slug_here
-   \`\`\`
+   ```
 
 3. **Fetch Dependencies:**
 
-   \`mix deps.get\`
+   `mix deps.get`
 
 4. **Compile the Project:**
 
-   \`mix compile\`
+   `mix compile`
 
 ## Running the Bot
 
 Run the application in interactive mode:
 
-\`iex -S mix\`
+`iex -S mix`
 
 Or run it without IEx to keep it running:
 
-\`mix run --no-halt\`
+`mix run --no-halt`
 
 The bot will start polling the Wanderer API and log notifications to the console when new visible systems are detected.
 
 ## How It Works
 
-1. **Polling:** The \`WandererNotifier.Poller\` GenServer makes an HTTP GET request to the endpoint:
-   \`\`\`
+1. **Polling:** The `WandererNotifier.Poller` GenServer makes an HTTP GET request to the endpoint:
+   ```
    GET /api/map/systems?slug=<map_slug>
-   \`\`\`
+   ```
    using your API token for authorization.
 
 2. **Filtering:** It parses the JSON response and extracts system IDs that are currently visible.
 
-3. **New System Detection:** It compares the current list of system IDs with those seen in previous polls using a \`MapSet\`. If any new IDs are found, it triggers a notification.
+3. **New System Detection:** It compares the current list of system IDs with those seen in previous polls using a `MapSet`. If any new IDs are found, it triggers a notification.
 
-4. **Notification:** Currently, the notification is a simple console log. You can extend the \`notify/1\` function to integrate with other notification services (email, Slack, Discord, etc.).
+4. **Notification:** Currently, the notification is a simple console log. You can extend the `notify/1` function to integrate with other notification services (email, Slack, Discord, etc.).
 
 ## Extending the Bot
 
-- **Custom Notifications:** Modify the \`notify/1\` function in \`lib/wanderer_notifier/poller.ex\` to change how notifications are delivered.
-- **Configuration:** Adjust the polling interval by modifying the delay in \`Process.send_after(self(), :poll, 60_000)\`.
+- **Custom Notifications:** Modify the `notify/1` function in `lib/wanderer_bot_starter/poller.ex` to change how notifications are delivered.
+- **Configuration:** Adjust the polling interval by modifying the delay in `Process.send_after(self(), :poll, 60_000)`.
 - **Multiple Maps:** To monitor multiple maps, you can start additional Poller processes with different API tokens and map slugs.
-
-## License
-
-MIT License
 
 ---
 
 Happy coding and extend away!
-```
-``` 
+
 

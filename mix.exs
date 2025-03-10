@@ -1,10 +1,10 @@
 # mix.exs
-defmodule WandererNotifier.MixProject do
+defmodule WandererBotStarter.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :wanderer_notifier,
+      app: :wanderer_bot_starter,
       version: "0.1.0",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule WandererNotifier.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      mod: {WandererNotifier.Application, []},
+      mod: {WandererBotStarter.Application, []},
       extra_applications: [:logger]
     ]
   end
